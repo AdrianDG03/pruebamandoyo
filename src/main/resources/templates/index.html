@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ventas</title>
+</head>
+<body>
+    <h1>Registro de Ventas</h1>
+    <a href="/nueva">Registrar  Nueva   Venta</a>
+
+    <div th:if="${msgExito !=null}">
+        <strong th:text="${msgExito}"></strong>
+    </div>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Codigo</th>
+        <th>Fecha</th>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Importe de la Venta</th>
+        <th>% Descuento</th>
+        <th>Importe del descuento</th>
+        <th>Importe a pagar</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="venta : ${ventas}" th:object="${venta}">
+        <td th:text="*{codVenta}"></td>
+        <td th:text="*{fechaVenta}"></td>
+        <td th:text="*{producto}"></td>
+        <td th:text="*{precio}"></td>
+        <td th:text="*{cantidad}"></td>
+        <td th:text="*{importeVenta}"></td>
+        <td th:text="*{porcentajeDescuento}"></td>
+        <td th:text="*{importeDescuento}"></td>
+        <td th:text="*{importePagar}"></td>
+        <td>
+            <div>
+                <a th:href="@{/{codVenta}/editar(codVenta=*{codVenta})}">Editar</a>
+            </div>
+            <div>
+                <a th:href="@{/{codVenta}/eliminar(codVenta=*{codVenta})}"
+                   onclick="return confirm('¿Estás seguro de eliminar esta venta?');">Eliminar</a>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
